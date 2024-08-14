@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next Descope Example
 
 ## Getting Started
 
-First, run the development server:
+1. Copy the `.env.local.example` to `.env.local` with the following variables:
+
+```env
+# Your Project ID
+NEXT_PUBLIC_DESCOPE_PROJECT_ID=<project-id>
+# Flow Id to run, e.g. sign-up-or-in
+NEXT_PUBLIC_DESCOPE_FLOW_ID=<flow-id>
+# Optional - Descope Base Url, either https://api.descope.com, https://api.sandbox.descope.com or http://localhost:8000
+NEXT_PUBLIC_DESCOPE_BASE_URL=<base-url>
+```
+
+Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## App Content
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This app contains 2 components:
 
-## Learn More
+### Home Page
 
-To learn more about Next.js, take a look at the following resources:
+a. When user is not logged-in:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- "Login" button (navigate to "Login page")
+- "Not Validated" user data that returned from server side props (see more details below)
+  ![home-page-not-logged-in](https://user-images.githubusercontent.com/10514677/206518925-16465344-f77d-4166-a0a5-22f9eea40438.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+b. When user is logged-in
 
-## Deploy on Vercel
+- The logged in user name (or id)
+- "Logout" button
+- "Submit" form, to demonstrate api (form) usage (see more details below)
+- "Validated" user data that returned from server side props
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![home-page-logged-in](https://user-images.githubusercontent.com/10514677/206575364-c574147b-18b0-4d0c-b6a6-af56c4ab7673.png)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Login Page
+
+- Shows login flow (Descope component)
+  ![login-page](https://user-images.githubusercontent.com/10514677/206518915-609865ce-196b-41be-9670-47278a72bd10.png)
+
+## 🧪 Testing
+
+1. Set up Descope environment variables in `.env.local` file
+
+```
+NEXT_PUBLIC_DESCOPE_PROJECT_ID="YOUR_DESCOPE_PROJECT_ID"
+DESCOPE_MANAGEMENT_KEY="YOUR MANAGEMENT KEY" // Required
+```
+
+_You can get your project-id [here](https://app.descope.com/settings/project)_.
+_You can get this flow-id from the Flows page [here](https://app.descope.com/flows)_.
+
+2. Open the Cypress App
+   Make sure you have the application running at `https://localhost:3000`. Then, in the root directory of the descope-explorer project, run the following to open the Cypress app:
+
+```
+npx cypress open
+```
+
+You'll need to select "E2E Testing" and your preferred browser for testing. For more info, check out the [Cypress Docs](https://docs.cypress.io/guides/getting-started/opening-the-app).
+
+3. Run E2E Tests
+   Now, simply click the "spec" you'd like to run and the test will start automatically.
