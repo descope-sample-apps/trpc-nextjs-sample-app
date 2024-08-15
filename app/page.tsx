@@ -6,7 +6,6 @@ import Link from "next/link";
 import { SyntheticEvent, useCallback, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { trpc_api } from '../app/utils/trpc';
-import { AuthProvider } from '@descope/nextjs-sdk';
 
 const getUserDisplayName = (user: any) =>
   user?.name || user?.externalIds?.[0] || "";
@@ -24,12 +23,15 @@ export default trpc_api.withTRPC(function Home() {
   const [apiFormResult, setApiFormResult] = useState<string>("");
   const [value, setValue] = useState();
 
-  // response should hold off and then refresh when isAuthenticated = true
-  const response = trpc_api.hello.useQuery({enabled: isAuthenticated});
+  const { isError, status, data, error, refetch, isFetching } =
+    trpc_api.hello.useQuery({
+      enabled: isAuthenticated,
+    })
 
   const handleSubmit = async (event: SyntheticEvent) => {
+    () => refetch()
     event.preventDefault();
-    const resultMessage = `Result: ${response.data}`;
+    const resultMessage = `Result: ${status}`;
     setApiFormResult(resultMessage);
     alert(resultMessage);
   };
@@ -53,8 +55,8 @@ export default trpc_api.withTRPC(function Home() {
             
           <Link href="/login" passHref>
             <div>{`Authenticated: ${isAuthenticated}`}</div>
-            <div>{`Response: ${response.data}`}</div>
-            <button>Login</button>
+            <div>{`Response: ${status}`}</div>
+            <button> Login </button>
           </Link>
         )}
         {isAuthenticated && (
@@ -63,7 +65,7 @@ export default trpc_api.withTRPC(function Home() {
               Hello {getUserDisplayName(user)}
             </div>
             <div>{`Authenticated: ${isAuthenticated}`}</div>
-            <div>{`Result: ${response.data}`}</div>
+            <div>{`Result: ${data}`}</div>
             <button onClick={onLogout}>Logout</button>
             <div className={styles.description}>Submit TRPC Form</div>
             <form onSubmit={handleSubmit}>
