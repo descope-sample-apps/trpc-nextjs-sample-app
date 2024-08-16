@@ -3,35 +3,33 @@
 import { useDescope, useSession, useUser } from "@descope/nextjs-sdk/client";
 import Head from "next/head";
 import Link from "next/link";
-import { SyntheticEvent, useCallback, useState } from "react";
+import React, { SyntheticEvent, useCallback, useState } from "react";
 import styles from "../styles/Home.module.css";
-import { trpc_api } from '../app/utils/trpc';
+import { trpc_api } from './utils/trpc';
+import superjson from "superjson/dist/index";
 
 const getUserDisplayName = (user: any) =>
   user?.name || user?.externalIds?.[0] || "";
 
 export default trpc_api.withTRPC(function Home() {
-    
   const { isAuthenticated } = useSession();
   const { user } = useUser();
   const { logout } = useDescope();
+
+  const {isError, data, error, refetch, isFetching } =
+  trpc_api.hello.useQuery()
 
   const onLogout = useCallback(() => {
     logout();
   }, [logout]);
 
   const [apiFormResult, setApiFormResult] = useState<string>("");
-  const [value, setValue] = useState();
-
-  const { isError, status, data, error, refetch, isFetching } =
-    trpc_api.hello.useQuery({
-      enabled: isAuthenticated,
-    })
 
   const handleSubmit = async (event: SyntheticEvent) => {
-    () => refetch()
+    () => refetch();
     event.preventDefault();
-    const resultMessage = `Result: ${status}`;
+    console.log(data);
+    const resultMessage = `Result: ${data}`;
     setApiFormResult(resultMessage);
     alert(resultMessage);
   };
@@ -52,11 +50,8 @@ export default trpc_api.withTRPC(function Home() {
           </a>
         </h1>
         {!isAuthenticated && (
-            
           <Link href="/login" passHref>
-            <div>{`Authenticated: ${isAuthenticated}`}</div>
-            <div>{`Response: ${status}`}</div>
-            <button> Login </button>
+            <button>Login</button>
           </Link>
         )}
         {isAuthenticated && (
@@ -64,10 +59,8 @@ export default trpc_api.withTRPC(function Home() {
             <div className={styles.description}>
               Hello {getUserDisplayName(user)}
             </div>
-            <div>{`Authenticated: ${isAuthenticated}`}</div>
-            <div>{`Result: ${data}`}</div>
             <button onClick={onLogout}>Logout</button>
-            <div className={styles.description}>Submit TRPC Form</div>
+            <div className={styles.description}>Submit API Form</div>
             <form onSubmit={handleSubmit}>
               <button data-cy="api-form-button" type="submit">
                 Submit

@@ -3,22 +3,19 @@
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
 import * as trpcNext from '@trpc/server/adapters/next';
-import { publicProcedure, router } from '../server/trpc';
-import { boolean, z } from 'zod';
+import { publicProcedure, router } from '../../server/trpc';
+import { z } from 'zod';
 
-const appRouter = router({
+export const appRouter = router({
   hello: publicProcedure
-    // This is the input schema of your procedure
-    // 💡 Tip: Try changing this and see type errors on the client straight away
-    .input(
-      z.object({
-        enabled: z.boolean(),
-      }),
-    )
-    .query(({ input }) => {
-      return {
-        text: `hello`,
-      };
+    //.input(
+    //  z.object({
+    //    enabled: z.boolean().nullish(),
+    //  }),
+    //)
+    .query(() => {
+      // This is what you're returning to your client
+      `hello world`
     }),
 });
 
@@ -29,5 +26,4 @@ export type AppRouter = typeof appRouter;
 // export API handler
 export default trpcNext.createNextApiHandler({
   router: appRouter,
-  createContext: () => ({}),
 });

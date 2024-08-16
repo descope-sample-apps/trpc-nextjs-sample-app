@@ -1,9 +1,9 @@
 import { authMiddleware } from "@descope/nextjs-sdk/server";
 
 export default authMiddleware({
-  projectId: "process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID",
+  projectId: process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID,
   redirectUrl: process.env.SIGN_IN_ROUTE || "/login",
-  publicRoutes: ["/", "/login", "/api/trpc", "/api/trpc"],
+  publicRoutes: ["/", "/login"],
 });
 
 export const config = {
