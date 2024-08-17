@@ -1,7 +1,5 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  swcMinify: true,
+/** @type {import("next").NextConfig} */
+module.exports = {
+  /** We run eslint as a separate task in CI */
+  eslint: { ignoreDuringBuilds: !!process.env.CI },
 };
-
-module.exports = nextConfig;

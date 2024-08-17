@@ -1,4 +1,4 @@
-# Next Descope Example
+# Next TRCP Descope Example
 
 ## Getting Started
 
@@ -32,43 +32,16 @@ This app contains 2 components:
 a. When user is not logged-in:
 
 - "Login" button (navigate to "Login page")
-- "Not Validated" user data that returned from server side props (see more details below)
-  ![home-page-not-logged-in](https://user-images.githubusercontent.com/10514677/206518925-16465344-f77d-4166-a0a5-22f9eea40438.png)
+- "Not Validated" user data that returned from server side props
 
 b. When user is logged-in
 
 - The logged in user name (or id)
 - "Logout" button
-- "Submit" form, to demonstrate api (form) usage (see more details below)
+- "Submit" form, to demonstrate trpc (form) usage
 - "Validated" user data that returned from server side props
 
-![home-page-logged-in](https://user-images.githubusercontent.com/10514677/206575364-c574147b-18b0-4d0c-b6a6-af56c4ab7673.png)
 
 ### Login Page
 
 - Shows login flow (Descope component)
-  ![login-page](https://user-images.githubusercontent.com/10514677/206518915-609865ce-196b-41be-9670-47278a72bd10.png)
-
-## 🧪 Testing
-
-1. Set up Descope environment variables in `.env.local` file
-
-```
-NEXT_PUBLIC_DESCOPE_PROJECT_ID="YOUR_DESCOPE_PROJECT_ID"
-DESCOPE_MANAGEMENT_KEY="YOUR MANAGEMENT KEY" // Required
-```
-
-_You can get your project-id [here](https://app.descope.com/settings/project)_.
-_You can get this flow-id from the Flows page [here](https://app.descope.com/flows)_.
-
-2. Open the Cypress App
-   Make sure you have the application running at `https://localhost:3000`. Then, in the root directory of the descope-explorer project, run the following to open the Cypress app:
-
-```
-npx cypress open
-```
-
-You'll need to select "E2E Testing" and your preferred browser for testing. For more info, check out the [Cypress Docs](https://docs.cypress.io/guides/getting-started/opening-the-app).
-
-3. Run E2E Tests
-   Now, simply click the "spec" you'd like to run and the test will start automatically.

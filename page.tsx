@@ -15,7 +15,6 @@ export default trpc_api.withTRPC(function Home() {
   const { user } = useUser();
   const { logout } = useDescope();
 
-  // some of the fields included in trcp queries, can be used for testing
   const {isError, data, error, refetch, isFetching } = trpc_api.hello.useQuery()
 
   const onLogout = useCallback(() => {
