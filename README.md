@@ -31,7 +31,7 @@ Navigate to the project directory and install the necessary dependencies:
 
 ```bash
 npm i
-npm install @trpc/server@next @trpc/client@next
+npm install @trpc/server@next @trpc/client@next @trpc/react-query@next @trpc/next@next @tanstack/react-query@latest zod
 npm install @descope/nextjs-sdk
 ```
 
