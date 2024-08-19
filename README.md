@@ -1,19 +1,58 @@
-# Next TRCP Descope Example
+# tRPC + Descope Next.js Sample App
 
-## Getting Started
+This app showcases the power of using tRPC for your API needs and Descope for secure authentication. This is great for Next.js developers who want to quickly create typesafe APIs with advanced auth methods. :zap:
 
-1. Copy the `.env.local.example` to `.env.local` with the following variables:
+## Features :sparkles:
 
-```env
-# Your Project ID
-NEXT_PUBLIC_DESCOPE_PROJECT_ID=<project-id>
-# Flow Id to run, e.g. sign-up-or-in
-NEXT_PUBLIC_DESCOPE_FLOW_ID=<flow-id>
-# Optional - Descope Base Url, either https://api.descope.com, https://api.sandbox.descope.com or http://localhost:8000
-NEXT_PUBLIC_DESCOPE_BASE_URL=<base-url>
+- **Secure Authentication**: Utilizes Descope for user authentication.
+- **Typesafe APIs**: Leverages tRPC to create endpoints that can be used in both the front and backend of your app.
+- **Flexible Procedures**: Easy to add or modify API procedures with tRPC.
+
+## Getting Started 🚀
+
+Follow these steps to clone the repository and start using the app.
+
+### Prerequisites
+
+- An account on [Descope](https://descope.com/).
+
+### Clone the Repository
+
+Start by cloning the repository to your local machine:
+
+```bash
+git clone https://github.com/descope-sample-apps/trpc-nextjs-sample-app.git
+cd trpc-nextjs-sample-app
 ```
 
-Run the development server:
+### Install Dependencies
+
+Navigate to the project directory and install the necessary dependencies:
+
+```bash
+npm i
+npm install @trpc/server@next @trpc/client@next
+npm i --save @descope/nextjs-sdk
+```
+
+### Configuration
+
+Before you run the app, make sure to configure the following:
+
+- **Environment Variables**: Set up your environment variables in a `.env.local` file. You'll need to include your Descope project settings:
+
+```
+####### Descope ENV Variables
+NEXT_PUBLIC_DESCOPE_PROJECT_ID="" // Descope Project ID
+NEXT_PUBLIC_DESCOPE_FLOW_ID="sign-up-or-in" // Descope flow to use on Sign In Page
+
+# Optional - Descope Base Url, either https://api.descope.com, https://api.sandbox.descope.com or http://localhost:8000
+NEXT_PUBLIC_DESCOPE_BASE_URL=""
+```
+
+### Running the App
+
+Once you've configured your app, you're ready to run it:
 
 ```bash
 npm run dev
@@ -21,27 +60,19 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command starts the Next.js development server, making your app accessible at [http://localhost:3000](http://localhost:3000).
 
-## App Content
+## Support :raised_hands:
 
-This app contains 2 components:
+If you encounter any issues or have questions, consult the tRPC and Descope documentation, or reach out to our [support](https://www.descope.com/contact) for assistance.
 
-### Home Page
+- [tRPC Documentation](https://trpc.io/docs/)
+- [Descope Documentation](https://docs.descope.com/)
 
-a. When user is not logged-in:
+## Contributing
 
-- "Login" button (navigate to "Login page")
-- "Not Validated" user data that returned from server side props
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you have suggestions or improvements.
 
-b. When user is logged-in
+## License
 
-- The logged in user name (or id)
-- "Logout" button
-- "Submit" form, to demonstrate trpc (form) usage
-- "Validated" user data that returned from server side props
-
-
-### Login Page
-
-- Shows login flow (Descope component)
+This sample app is open-source and available under the MIT License. See the LICENSE file for more details.

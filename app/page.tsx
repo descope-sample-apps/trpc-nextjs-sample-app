@@ -15,7 +15,7 @@ export default trpc_api.withTRPC(function Home() {
   const { user } = useUser();
   const { logout } = useDescope();
 
-  // some of the fields included in trcp queries, can be used for testing
+  // some of the fields included in trpc queries, can be used for testing
   const {isError, data, error, refetch, isFetching } = trpc_api.hello.useQuery()
 
   const onLogout = useCallback(() => {
@@ -46,7 +46,7 @@ export default trpc_api.withTRPC(function Home() {
         <h1 className={styles.title}>
         Welcome to the{" "}
           <a href="https://github.com/descope-sample-apps/trpc-nextjs-sample-app">
-            Descope Next.js TRCP Sample App
+            Descope Next.js TRPC Sample App
           </a>
         </h1>
         {!isAuthenticated && (
