@@ -32,7 +32,7 @@ Navigate to the project directory and install the necessary dependencies:
 ```bash
 npm i
 npm install @trpc/server@next @trpc/client@next
-npm i --save @descope/nextjs-sdk
+npm install @descope/nextjs-sdk
 ```
 
 ### Configuration
