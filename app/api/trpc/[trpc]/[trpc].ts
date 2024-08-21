@@ -3,15 +3,16 @@
  * On a bigger app, you will probably want to split this file up into multiple files.
  */
 import * as trpcNext from '@trpc/server/adapters/next';
-import { publicProcedure, router } from '../../../server/trpc';
-import { z } from 'zod';
+import { publicProcedure, protectedProcedure, router } from '../../../server/trpc';
+import { createContext } from "../../../server/context"
 
 export const appRouter = router({
-  hello: publicProcedure
-    .query(() => {
-      // This is what you're returning to your client
-      return `hello world`
-    }),
+  // this is accessible for everyone
+  hello: protectedProcedure.query(() => {
+    return {
+      secret: `Congratulations! You are successfully accessing a protected procedure using Descope Authentication!`,
+    }
+  }),
 });
 
 // export only the type definition of the API
@@ -21,4 +22,5 @@ export type AppRouter = typeof appRouter;
 // export API handler
 export default trpcNext.createNextApiHandler({
   router: appRouter,
-});
+  createContext: createContext,
+})

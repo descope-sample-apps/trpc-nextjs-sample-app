@@ -9,18 +9,21 @@ import { trpc_api } from './utils/trpc';
 
 const getUserDisplayName = (user: any) =>
   user?.name || user?.externalIds?.[0] || "";
-
-export default trpc_api.withTRPC(function Home() {
+  export default trpc_api.withTRPC(function Home() {
   const { isAuthenticated } = useSession();
   const { user } = useUser();
   const { logout } = useDescope();
+  const sdk = useDescope();
 
-  // some of the fields included in trpc queries, can be used for testing
+
+    // some of the fields included in trpc queries, can be used for testing
   const {isError, data, error, refetch, isFetching } = trpc_api.hello.useQuery()
 
-  const onLogout = useCallback(() => {
-    logout();
-  }, [logout]);
+  const onLogout = () => {
+    sdk.logout();
+    window.location.reload();
+    () => refetch();
+  }
 
   const [apiFormResult, setApiFormResult] = useState<string>("");
 
@@ -28,10 +31,9 @@ export default trpc_api.withTRPC(function Home() {
     //refetches the trpc query on submit and generates alert
     () => refetch();
     event.preventDefault();
-    console.log(data);
-    const resultMessage = `Result: ${data}`;
+    console.log(data?.secret);
+    const resultMessage = `${data?.secret}`;
     setApiFormResult(resultMessage);
-    alert(resultMessage);
   };
 
   return (
@@ -50,9 +52,18 @@ export default trpc_api.withTRPC(function Home() {
           </a>
         </h1>
         {!isAuthenticated && (
+          <>
           <Link href="/login" passHref>
             <button>Login</button>
           </Link>
+          <div className={styles.description}>Submit TRPC Form</div>
+            <form onSubmit={handleSubmit}>
+              <button data-cy="api-form-button" type="submit">
+                Submit
+              </button>
+            </form>
+            <div>{'tRPC Query: ' + apiFormResult}</div>
+          </>
         )}
         {isAuthenticated && (
           <>
@@ -66,7 +77,7 @@ export default trpc_api.withTRPC(function Home() {
                 Submit
               </button>
             </form>
-            <div>{apiFormResult}</div>
+            <div>{'tRPC Query: ' + apiFormResult}</div>
           </>
         )}
 

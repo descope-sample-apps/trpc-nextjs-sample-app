@@ -1,5 +1,4 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
-
 import { appRouter } from "../[trpc]/[trpc]";
 
 const handler = (req: Request) =>
@@ -7,7 +6,7 @@ const handler = (req: Request) =>
       endpoint: "/api/trpc",
       req,
       router: appRouter,
-      createContext: () => ({}),
+      createContext: () => ({auth: req.headers.has("x-descope-session")})
     });
   
   export { handler as GET, handler as POST };
