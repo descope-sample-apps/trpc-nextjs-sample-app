@@ -7,7 +7,7 @@ import { publicProcedure, protectedProcedure, router } from '../../../server/trp
 import { createContext } from "../../../server/context"
 
 export const appRouter = router({
-  // this is accessible for everyone
+  // only accessible to authorized users
   hello: protectedProcedure.query(() => {
     return {
       secret: `Congratulations! You are successfully accessing a protected procedure using Descope Authentication!`,
