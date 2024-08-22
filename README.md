@@ -1,4 +1,4 @@
-<img width="1400" alt="Descope tRPC Banner" src="https://github.com/descope-sample-apps/trpc-nextjs-sample-app/trpc_sample_app_banner.png">
+<img width="1400" alt="Descope tRPC Banner" src="./trpc_sample_app_banner.png">
 
 
 # tRPC + Descope Next.js Sample App
