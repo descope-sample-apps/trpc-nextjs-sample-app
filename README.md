@@ -1,3 +1,6 @@
+<img width="1400" alt="Descope tRPC Banner" src="https://github.com/descope-sample-apps/trpc-nextjs-sample-app/trpc_sample_app_banner.png">
+
+
 # tRPC + Descope Next.js Sample App
 
 This app showcases the power of using tRPC for your API needs and Descope for secure authentication. This is great for Next.js developers who want to quickly create typesafe APIs with advanced auth methods. :zap:
