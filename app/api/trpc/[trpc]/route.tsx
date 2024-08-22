@@ -6,7 +6,7 @@ const handler = (req: Request) =>
       endpoint: "/api/trpc",
       req,
       router: appRouter,
-      createContext: () => ({auth: req.headers.has("x-descope-session")})
+      createContext: () => ({auth: Promise.resolve(req.headers.has("x-descope-session"))})
     });
   
   export { handler as GET, handler as POST };

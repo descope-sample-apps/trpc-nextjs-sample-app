@@ -4,7 +4,6 @@ export async function createContext({
   req,
 }: trpcNext.CreateNextContextOptions) {
   async function getSessionFromHeader() {
-    console.log(req)
     if (req.headers.has("x-descope-session")) {
       return true;
     }

@@ -3,26 +3,31 @@
 import { useDescope, useSession, useUser } from "@descope/nextjs-sdk/client";
 import Head from "next/head";
 import Link from "next/link";
-import React, { SyntheticEvent, useCallback, useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import styles from "../styles/Home.module.css";
 import { trpc_api } from './utils/trpc';
+import { useQueryClient } from '@tanstack/react-query'
+import { getQueryKey } from '@trpc/react-query';
+
+
 
 const getUserDisplayName = (user: any) =>
   user?.name || user?.externalIds?.[0] || "";
   export default trpc_api.withTRPC(function Home() {
   const { isAuthenticated } = useSession();
   const { user } = useUser();
-  const { logout } = useDescope();
   const sdk = useDescope();
-
-
+  const queryClient = useQueryClient();
+  const userKey = getQueryKey(trpc_api.hello);
+  
     // some of the fields included in trpc queries, can be used for testing
   const {isError, data, error, refetch, isFetching } = trpc_api.hello.useQuery()
 
+  const utils = trpc_api.useUtils();
+
   const onLogout = () => {
     sdk.logout();
-    window.location.reload();
-    () => refetch();
+    queryClient.removeQueries({ queryKey: userKey });
   }
 
   const [apiFormResult, setApiFormResult] = useState<string>("");
@@ -34,6 +39,7 @@ const getUserDisplayName = (user: any) =>
     console.log(data?.secret);
     const resultMessage = `${data?.secret}`;
     setApiFormResult(resultMessage);
+    utils.invalidate();
   };
 
   return (
