@@ -8,16 +8,16 @@
     "start": "next start"
   },
   "dependencies": {
-    "@descope/nextjs-sdk": "^0.2.1",
-    "@tanstack/react-query": "^5.52.0",
-    "@trpc/client": "npm:@trpc/client@next",
-    "@trpc/next": "npm:@trpc/next@next",
-    "@trpc/react-query": "npm:@trpc/react-query@next",
-    "@trpc/server": "npm:@trpc/server@next",
+    "@descope/nextjs-sdk": "^0.2.5",
+    "@tanstack/react-query": "^5.54.1",
+    "@trpc/client": "^11.0.0-rc.498",
+    "@trpc/next": "^11.0.0-rc.498",
+    "@trpc/react-query": "^11.0.0-rc.498",
+    "@trpc/server": "^11.0.0-rc.498",
     "next": "^14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "zod": "^3.0.0"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

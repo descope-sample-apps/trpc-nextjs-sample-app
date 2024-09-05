@@ -1,4 +1,3 @@
-import { useUser } from '@descope/nextjs-sdk/client';
 /**
  * This is your entry point to setup the root configuration for tRPC on the server.
  * - `initTRPC` should only be used once per app.
