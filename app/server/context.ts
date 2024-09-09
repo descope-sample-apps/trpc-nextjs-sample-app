@@ -1,14 +1,15 @@
 import * as trpcNext from '@trpc/server/adapters/next';
+import { session } from '@descope/nextjs-sdk/server';
 
 export async function createContext({ req }: 
     trpcNext.CreateNextContextOptions) {
-        async function getSessionFromHeader() {
-        if (req.headers && req.headers["x-descope-session"]) {
-            return true;
-        }
-        return false;
+        async function getSessionAuth() {
+            const hasSessionHeader = req.headers["x-descope-session"];
+            if (!hasSessionHeader) return false;
+            const descopeSession = await session();
+            return Boolean(descopeSession?.token.isAuthenticated);
     }   
-    const auth = getSessionFromHeader();
+    const auth = getSessionAuth();
     return { auth };
 }
 
