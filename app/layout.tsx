@@ -2,12 +2,7 @@
 
 import React from "react";
 import { AuthProvider } from "@descope/nextjs-sdk";
-import { Inter as FontSans } from "next/font/google";
-
-const fontSans = FontSans({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import "../styles/globals.css";
 
 export default function RootLayout({
   children,
@@ -20,7 +15,7 @@ export default function RootLayout({
         projectId={process.env.NEXT_PUBLIC_DESCOPE_PROJECT_ID || ""}
         baseUrl={process.env.NEXT_PUBLIC_DESCOPE_BASE_URL || ""}
       >
-        <body className={fontSans.className}>{children}</body>
+        <body>{children}</body>
       </AuthProvider>
     </html>
   );
